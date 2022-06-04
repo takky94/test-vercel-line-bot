@@ -1,6 +1,7 @@
 import {
   Client,
   FollowEvent,
+  MessageEvent,
   middleware as _middleware,
   WebhookEvent,
 } from "@line/bot-sdk";
@@ -16,25 +17,34 @@ export const middleware = _middleware(config);
 
 /** BOTの友達追加に対するレスポンス */
 const greeting = async (e: FollowEvent) => {
+  const { replyToken } = e;
   const displayName = e.source.userId
     ? `${(await client.getProfile(e.source.userId)).displayName}さん\n`
     : "";
 
-  return client.replyMessage(e.replyToken, {
+  await client.replyMessage(replyToken, {
     type: "text",
     text: `${displayName}友達追加ありがとうございますンゴねぇ`,
   });
 };
 
+/** なんか送られたメッセージに対するレスポンス */
+const reply = async (e: MessageEvent) => {
+  const { replyToken } = e;
+  await client.replyMessage(replyToken, {
+    type: "text",
+    text: "アアアアアアアアアアア",
+  });
+};
+
 /** WebhookEventのtypeごとに色々やる */
 export const handleWebhookEvent = async (e: WebhookEvent) => {
-  const response = [];
-
   switch (e.type) {
     case "follow":
-      await response.push(greeting(e));
+      await greeting(e);
+      break;
+    case "message":
+      await reply(e);
       break;
   }
-
-  return response;
 };
