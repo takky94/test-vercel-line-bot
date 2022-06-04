@@ -8,6 +8,13 @@ import { Middleware } from "@line/bot-sdk/dist/middleware";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { client, middleware } from "../../lib/line";
 
+// ref: https://nextjs.org/docs/api-routes/api-middlewares#custom-config
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
+
 // ref: https://nextjs.org/docs/api-routes/api-middlewares
 function runMiddleware(
   req: NextApiRequest,
