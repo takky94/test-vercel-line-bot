@@ -1,12 +1,7 @@
-import {
-  MessageAPIResponseBase,
-  TextMessage,
-  WebhookEvent,
-  WebhookRequestBody,
-} from "@line/bot-sdk";
+import { WebhookEvent } from "@line/bot-sdk";
 import { Middleware } from "@line/bot-sdk/dist/middleware";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { client, middleware } from "../../lib/line";
+import { handleWebhookEvent, middleware } from "../../lib/line";
 
 // ref: https://nextjs.org/docs/api-routes/api-middlewares#custom-config
 export const config = {
@@ -31,29 +26,6 @@ function runMiddleware(
   });
 }
 
-// Function handler to receive the text.
-const textEventHandler = async (
-  event: WebhookEvent
-): Promise<MessageAPIResponseBase | undefined> => {
-  // Process all variables here.
-  if (event.type !== "message" || event.message.type !== "text") {
-    return;
-  }
-
-  // Process all message related variables here.
-  const { replyToken } = event;
-  const { text } = event.message;
-
-  // Create a new message.
-  const response: TextMessage = {
-    type: "text",
-    text,
-  };
-
-  // Reply to the user.
-  await client.replyMessage(replyToken, response);
-};
-
 // ref: https://github.com/line/line-bot-sdk-nodejs/blob/next/examples/echo-bot-ts/index.ts
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   // Run the middleware
@@ -65,7 +37,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   const results = await Promise.all(
     events.map(async (e: WebhookEvent) => {
       try {
-        await textEventHandler(e);
+        await handleWebhookEvent(e);
       } catch (error: unknown) {
         if (error instanceof Error) {
           console.error(error);
