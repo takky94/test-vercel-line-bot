@@ -1,5 +1,6 @@
 import type { NextPage } from "next";
 import Head from "next/head";
+import Border from "../components/Border";
 import Title from "../components/Title";
 import styles from "../styles/pages/Home.module.scss";
 
@@ -12,7 +13,9 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <section className={styles.fv}>
+        <Border />
         <Title />
+        <Border isBottom={true} />
       </section>
     </div>
   );
