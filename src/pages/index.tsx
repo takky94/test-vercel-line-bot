@@ -21,6 +21,22 @@ const Home: NextPage = () => {
       <div className={styles.separator}>
         <Motif />
       </div>
+      <section className={styles.message}>
+        <p className={styles.strong}>謹啓</p>
+        <p>
+          <span>皆様におかれましては</span>
+          <span>ますますご清祥のこととお慶び申し上げます</span>
+          <br />
+          <span>このたび私たちは結婚をすることになりました</span>
+          <br />
+          <span>つきましては日頃お世話になっております皆様に</span>
+          <span>感謝を込めてささやかな小宴を催したく存じます</span>
+          <br />
+          <span>ご多用中誠に恐縮ではございますが</span>
+          <span>ぜひご出席をいただきたくご案内申し上げます</span>
+        </p>
+        <p className={styles.strong}>謹白</p>
+      </section>
     </div>
   );
 };

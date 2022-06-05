@@ -4,6 +4,11 @@
   background: $c-main-900;
   min-height: 100vh;
   padding: 10px;
+  & > * {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: $w-max-content;
+  }
 }
 
 // First View
@@ -11,15 +16,37 @@
   background: $c-main-100;
   box-shadow: 0 10px 20px -3px rgba(0, 0, 0, 0.1);
   color: $c-black-900;
-  margin-left: auto;
-  margin-right: auto;
-  max-width: $w-max-content;
   padding: 10px;
   width: 100%;
 }
 
 // Separator
 .separator {
-  margin: 80px 0 40px;
+  margin-bottom: 40px;
+  margin-top: 80px;
   text-align: center;
+}
+
+// Message
+.message {
+  color: $c-white-900;
+  text-align: center;
+  .strong {
+    font-size: 22px;
+    font-weight: 700;
+    @include mediaMin($m-m) {
+      font-size: 24px;
+    }
+  }
+  p {
+    font-size: 4.2vw;
+    font-weight: 500;
+    @include mediaMin($m-m) {
+      font-size: 19px;
+    }
+    span {
+      display: block;
+      line-height: 1.8;
+    }
+  }
 }
