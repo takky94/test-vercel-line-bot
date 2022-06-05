@@ -1,5 +1,6 @@
 import type { NextPage } from "next";
 import Head from "next/head";
+import { useEffect, useState } from "react";
 import Border from "../components/Border";
 import Layout from "../components/Layout";
 import Motif from "../components/Motif";
@@ -7,6 +8,22 @@ import Title from "../components/Title";
 import styles from "../styles/pages/Home.module.scss";
 
 const Home: NextPage = () => {
+  const [profile, setProfile] = useState<{
+    userId: string;
+    displayName: string;
+    pictureUrl?: string;
+    statusMessage?: string;
+  } | null>(null);
+
+  useEffect(() => {
+    (async () => {
+      const liff = (await import("@line/liff")).default;
+      await liff.ready;
+      const profile = await liff.getProfile();
+      setProfile(profile);
+    })();
+  }, []);
+
   return (
     <Layout>
       <Head>
@@ -25,7 +42,7 @@ const Home: NextPage = () => {
       <section className={styles.message}>
         <p className={styles.strong}>謹啓</p>
         <p>
-          <span>皆様におかれましては</span>
+          <span>{profile?.displayName ?? "皆"}様におかれましては</span>
           <span>ますますご清祥のこととお慶び申し上げます</span>
           <br />
           <span>このたび私たちは結婚をすることになりました</span>
