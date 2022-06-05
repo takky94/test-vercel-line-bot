@@ -1,0 +1,24 @@
+@import "../consts/";
+
+.wrap {
+  width: 100%;
+  path {
+    animation: handWriting 0.4s ease-in-out both;
+    stroke: $c-black-700;
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 0;
+    @for $i from 1 through 80 {
+      &:nth-child(#{$i}) {
+        animation-delay: calc(0.1s * #{$i});
+      }
+    }
+  }
+  @keyframes handWriting {
+    0% {
+      stroke-dashoffset: 1000;
+    }
+    100% {
+      stroke-dashoffset: 0;
+    }
+  }
+}
