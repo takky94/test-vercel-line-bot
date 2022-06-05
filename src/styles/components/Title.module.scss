@@ -3,22 +3,27 @@
 .wrap {
   width: 100%;
   path {
-    animation: handWriting 0.4s ease-in-out both;
-    stroke: $c-black-700;
-    stroke-dasharray: 1000;
+    animation: handWriting 0.8s ease-in-out both;
+    fill: $c-main-900;
+    stroke: $c-main-100;
+    stroke-dasharray: 300;
     stroke-dashoffset: 0;
     @for $i from 1 through 80 {
       &:nth-child(#{$i}) {
-        animation-delay: calc(0.1s * #{$i});
+        animation-delay: calc(0.2s * #{$i});
       }
     }
   }
   @keyframes handWriting {
     0% {
-      stroke-dashoffset: 1000;
+      stroke: $c-main-100;
+      stroke-dashoffset: 300;
+      fill: $c-main-100;
     }
     100% {
+      stroke: $c-main-900;
       stroke-dashoffset: 0;
+      fill: $c-main-900;
     }
   }
 }
