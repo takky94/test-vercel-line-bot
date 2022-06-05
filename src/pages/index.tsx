@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import Border from "../components/Border";
+import Motif from "../components/Motif";
 import Title from "../components/Title";
 import styles from "../styles/pages/Home.module.scss";
 
@@ -17,6 +18,9 @@ const Home: NextPage = () => {
         <Title />
         <Border isBottom={true} />
       </section>
+      <div className={styles.separator}>
+        <Motif />
+      </div>
     </div>
   );
 };
