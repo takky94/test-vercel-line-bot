@@ -1,0 +1,16 @@
+/**
+ * メディアクエリを出力する関数
+ * ex) @include mediaMax($media-m) { margin: 0 1rem; } // 780px以下ではmarginが効く
+ * ex) @include mediaMin($media-m) { margin: 0 1rem; } // 781px以上ではmarginが効く
+ */
+@mixin mediaMax($size) {
+  @media screen and (max-width: #{$size}px) {
+    @content;
+  }
+}
+
+@mixin mediaMin($size) {
+  @media screen and (min-width: #{$size + 1}px) {
+    @content;
+  }
+}
