@@ -18,9 +18,18 @@ const Home: NextPage = () => {
   useEffect(() => {
     (async () => {
       const liff = (await import("@line/liff")).default;
-      await liff.ready;
-      const profile = await liff.getProfile();
-      setProfile(profile);
+      await liff.ready.then(async () => {
+        if (liff.isLoggedIn()) {
+          const profile = await liff.getProfile().then((profile) => {
+            setProfile(profile);
+            console.log("ログインしてるユーザーのid:" + profile.userId);
+            console.log("ログインしてるユーザーの名前:" + profile.displayName);
+            console.log(
+              "ログインしてるユーザーの画像URL:" + profile.pictureUrl
+            );
+          });
+        }
+      });
     })();
   }, []);
 
